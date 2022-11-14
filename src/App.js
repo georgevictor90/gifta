@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import RouteSwitch from "./components/RouteSwitch";
 
 function App() {
+  const [data, setData] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  }, []);
+
+  // const productNameListItems = data.map((product) => {
+  //   return <li key={product.id}>{product.title}</li>;
+  // });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouteSwitch data={data} />
     </div>
   );
 }
