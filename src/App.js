@@ -63,7 +63,6 @@ function App() {
     const selectedProduct = displayedProducts.find(
       (prod) => prod.id.toString() === productId
     );
-    console.log(selectedProduct);
     updatedCart.push(selectedProduct);
     setCart(updatedCart);
   }

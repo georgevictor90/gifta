@@ -31,7 +31,7 @@ function RouteSwitch(props) {
           }
         />
         <Route path="/shop/product" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart cart={props.cart} />} />
         {/* <Route path="*" element={<NoMatch />} /> */}
       </Routes>
       <Footer />
