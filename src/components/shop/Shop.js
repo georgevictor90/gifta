@@ -3,9 +3,10 @@ import Card from "../card/Card";
 import Sidebar from "../sidebar/Sidebar";
 
 function Shop(props) {
-  const cardElements = props.data.map((product) => {
+  const cardElements = props.displayedProducts.map((product) => {
     return (
       <Card
+        addToCart={props.addToCart}
         key={product.id}
         id={product.id}
         title={product.title}
@@ -16,11 +17,16 @@ function Shop(props) {
     );
   });
 
-  // console.log(cardElements);
-
   return (
     <section className="shop">
-      <Sidebar data={props.data} />
+      <Sidebar
+        allProducts={props.allProducts}
+        allCategories={props.allCategories}
+        handleClick={props.handleClick}
+        showAllProducts={props.showAllProducts}
+        sortPriceAscending={props.sortPriceAscending}
+        sortPriceDescending={props.sortPriceDescending}
+      />
       <div className="cards-container">{cardElements}</div>
     </section>
   );

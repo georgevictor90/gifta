@@ -10,11 +10,26 @@ import Footer from "./footer/Footer";
 function RouteSwitch(props) {
   return (
     <BrowserRouter>
-      <Nav />
+      <Nav cart={props.cart} />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route exact path="/shop" element={<Shop data={props.data} />} />
+        <Route
+          exact
+          path="/shop"
+          element={
+            <Shop
+              addToCart={props.addToCart}
+              displayedProducts={props.displayedProducts}
+              allProducts={props.allProducts}
+              allCategories={props.allCategories}
+              handleClick={props.handleClick}
+              showAllProducts={props.showAllProducts}
+              sortPriceAscending={props.sortPriceAscending}
+              sortPriceDescending={props.sortPriceDescending}
+            />
+          }
+        />
         <Route path="/shop/product" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         {/* <Route path="*" element={<NoMatch />} /> */}

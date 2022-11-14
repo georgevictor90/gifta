@@ -2,9 +2,8 @@ import React from "react";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 
 function Card(props) {
-  // console.log(props);
   return (
-    <div className="card">
+    <div className="card" id={props.id}>
       {/* get favoriteStatus from props and conditionally render heart icon */}
       <MdOutlineFavoriteBorder className="card-favorite-icon" />
 
@@ -19,7 +18,9 @@ function Card(props) {
       {/* get price from props */}
       <span className="card-price">{props.price} EUR</span>
 
-      <button className="card-button">Add to cart</button>
+      <button className="card-button" onClick={props.addToCart}>
+        Add to cart
+      </button>
     </div>
   );
 }

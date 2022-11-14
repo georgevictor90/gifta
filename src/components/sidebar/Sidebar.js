@@ -1,20 +1,32 @@
 import React from "react";
 
-function Sidebar({ data }) {
-  const categories = [];
-  data.forEach((prod) => {
-    if (categories.includes(prod.category)) return;
-    categories.push(prod.category);
-  });
-
-  const listItems = categories.map((categ) => {
-    return <li key={categ}>{categ}</li>;
+function Sidebar({
+  allCategories,
+  handleClick,
+  showAllProducts,
+  sortPriceAscending,
+  sortPriceDescending,
+}) {
+  const listItems = allCategories.map((categ) => {
+    return (
+      <li id={categ.category} key={categ.category} onClick={handleClick}>
+        {categ.category}
+      </li>
+    );
   });
 
   return (
     <div className="sidebar">
       <h5>Categories</h5>
-      <ul>{listItems}</ul>
+      <ul>
+        <li onClick={showAllProducts}>All Products</li>
+        {listItems}
+      </ul>
+      <h5>Sort Price</h5>
+      <ul>
+        <li onClick={sortPriceDescending}>High to low</li>
+        <li onClick={sortPriceAscending}>Low to high</li>
+      </ul>
     </div>
   );
 }

@@ -3,21 +3,84 @@ import React from "react";
 import RouteSwitch from "./components/RouteSwitch";
 
 function App() {
-  const [data, setData] = React.useState([]);
+  const [allProducts, setAllProducts] = React.useState([]);
+  const [allCategories, setAllCategories] = React.useState([]);
+  const [displayedProducts, setDisplayedProducts] = React.useState([]);
+  const [cart, setCart] = React.useState([]);
 
   React.useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((data) => setAllProducts(data));
   }, []);
 
-  // const productNameListItems = data.map((product) => {
-  //   return <li key={product.id}>{product.title}</li>;
-  // });
+  React.useEffect(() => {
+    fetch("https://fakestoreapi.com/products/categories")
+      .then((res) => res.json())
+      .then((json) =>
+        setAllCategories(
+          json.map((categ) => {
+            return {
+              category: categ,
+              checked: true,
+            };
+          })
+        )
+      );
+  }, []);
+
+  React.useEffect(() => {
+    setDisplayedProducts(allProducts);
+  }, [allProducts]);
+
+  function selectCategory(e) {
+    setDisplayedProducts(
+      allProducts.filter((prod) => prod.category === e.target.id)
+    );
+  }
+
+  function showAllProducts() {
+    setDisplayedProducts(allProducts);
+  }
+
+  function sortPriceAscending() {
+    const sorted = [...displayedProducts].sort((a, b) =>
+      Number(a.price) > Number(b.price) ? 1 : -1
+    );
+    setDisplayedProducts(sorted);
+  }
+
+  function sortPriceDescending() {
+    const sorted = [...displayedProducts].sort((a, b) =>
+      Number(a.price) < Number(b.price) ? 1 : -1
+    );
+    setDisplayedProducts(sorted);
+  }
+
+  function addToCart(e) {
+    const productId = e.target.parentNode.id;
+    const updatedCart = [...cart];
+    const selectedProduct = displayedProducts.find(
+      (prod) => prod.id.toString() === productId
+    );
+    console.log(selectedProduct);
+    updatedCart.push(selectedProduct);
+    setCart(updatedCart);
+  }
 
   return (
     <div className="App">
-      <RouteSwitch data={data} />
+      <RouteSwitch
+        addToCart={addToCart}
+        cart={cart}
+        displayedProducts={displayedProducts}
+        allProducts={allProducts}
+        allCategories={allCategories}
+        handleClick={selectCategory}
+        showAllProducts={showAllProducts}
+        sortPriceAscending={sortPriceAscending}
+        sortPriceDescending={sortPriceDescending}
+      />
     </div>
   );
 }
