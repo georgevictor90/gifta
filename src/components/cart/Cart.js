@@ -2,16 +2,6 @@ import React from "react";
 import { nanoid } from "nanoid";
 
 function Cart({ cart, setCart }) {
-  // console.log(cart);
-  // const [cart, setCart] = React.useState([]);
-
-  // React.useEffect(() => {
-  //   const items = cart.map((prod) => {
-  //     return { ...prod, quantity: 1 };
-  //   });
-  //   setCart(items);
-  // }, [cart]);
-
   function incrementQuantity(e) {
     // console.log(e.target.parentNode.parentNode.parentNode.id);
     const productId = e.target.parentNode.parentNode.parentNode.id;
@@ -38,10 +28,11 @@ function Cart({ cart, setCart }) {
   }
 
   function removeFromCart(e) {
-    const productId = e.target.parentNode.parentNode.parentNode.id;
+    let newCartItems = [...cart];
+    const productId = e.target.dataset.id;
     const itemToRemove = cart.find((prod) => prod.id.toString() === productId);
     const index = cart.indexOf(itemToRemove);
-    const newCartItems = cart.splice(index, 1);
+    newCartItems.splice(index, 1);
     setCart(newCartItems);
   }
 
@@ -67,7 +58,9 @@ function Cart({ cart, setCart }) {
           <span>{prod.price * prod.quantity} EUR</span>
         </div>
         <div className="button-container">
-          <button onClick={removeFromCart}>Remove item</button>
+          <button data-id={prod.id} onClick={removeFromCart}>
+            Remove item
+          </button>
         </div>
       </div>
     );
@@ -76,7 +69,11 @@ function Cart({ cart, setCart }) {
   return (
     <section className="cart">
       <h1>Your shopping cart</h1>
-      <div className="items-container">{cartProducts}</div>
+      {cart.length ? (
+        <div className="items-container">{cartProducts}</div>
+      ) : (
+        <h4>You have no items added to your cart</h4>
+      )}
     </section>
   );
 }

@@ -81,7 +81,7 @@ function App() {
     // console.log();
 
     if (found) {
-      console.log("already in cart");
+      // console.log("already in cart");
       updatedCart = updatedCart.map((item) => {
         return item.id === selectedProduct.id
           ? { ...item, quantity: item.quantity + 1 }
