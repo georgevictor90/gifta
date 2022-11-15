@@ -10,7 +10,7 @@ import Footer from "./footer/Footer";
 function RouteSwitch(props) {
   return (
     <BrowserRouter>
-      <Nav cart={props.cart} />
+      <Nav cartCounter={props.cartCounter} />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -31,7 +31,10 @@ function RouteSwitch(props) {
           }
         />
         <Route path="/shop/product" element={<Product />} />
-        <Route path="/cart" element={<Cart cart={props.cart} />} />
+        <Route
+          path="/cart"
+          element={<Cart cart={props.cart} setCart={props.setCart} />}
+        />
         {/* <Route path="*" element={<NoMatch />} /> */}
       </Routes>
       <Footer />

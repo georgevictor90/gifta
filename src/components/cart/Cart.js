@@ -1,51 +1,53 @@
 import React from "react";
+import { nanoid } from "nanoid";
 
-function Cart({ cart }) {
+function Cart({ cart, setCart }) {
   // console.log(cart);
-  const [cartItems, setCartItems] = React.useState([]);
+  // const [cart, setCart] = React.useState([]);
 
-  React.useEffect(() => {
-    const items = cart.map((prod) => {
-      return { ...prod, quantity: 1 };
-    });
-    setCartItems(items);
-  }, [cart]);
+  // React.useEffect(() => {
+  //   const items = cart.map((prod) => {
+  //     return { ...prod, quantity: 1 };
+  //   });
+  //   setCart(items);
+  // }, [cart]);
 
   function incrementQuantity(e) {
     // console.log(e.target.parentNode.parentNode.parentNode.id);
     const productId = e.target.parentNode.parentNode.parentNode.id;
-    const newCartItems = cartItems.map((prod) => {
-      return prod.id == productId
+    const newCartItems = cart.map((prod) => {
+      return prod.id.toString() === productId
         ? { ...prod, quantity: prod.quantity + 1 }
         : prod;
     });
     console.log(newCartItems);
-    setCartItems(newCartItems);
+    setCart(newCartItems);
   }
 
   function decrementQuantity(e) {
     const productId = e.target.parentNode.parentNode.parentNode.id;
-    if (cartItems.find((prod) => prod.id == productId).quantity === 1) return;
-    const newCartItems = cartItems.map((prod) => {
-      return prod.id == productId
+    if (cart.find((prod) => prod.id.toString() === productId).quantity === 1)
+      return;
+    const newCartItems = cart.map((prod) => {
+      return prod.id.toString() === productId
         ? { ...prod, quantity: prod.quantity - 1 }
         : prod;
     });
-    setCartItems(newCartItems);
+    setCart(newCartItems);
     // console.log(productId);
   }
 
   function removeFromCart(e) {
     const productId = e.target.parentNode.parentNode.parentNode.id;
-    const itemToRemove = cartItems.find((prod) => prod.id == productId);
-    const index = cartItems.indexOf(itemToRemove);
-    const newCartItems = cartItems.splice(index, 1);
-    setCartItems(newCartItems);
+    const itemToRemove = cart.find((prod) => prod.id.toString() === productId);
+    const index = cart.indexOf(itemToRemove);
+    const newCartItems = cart.splice(index, 1);
+    setCart(newCartItems);
   }
 
-  const cartProducts = cartItems.map((prod) => {
+  const cartProducts = cart.map((prod) => {
     return (
-      <div key={prod.id} id={prod.id} className="cart-product">
+      <div key={nanoid()} id={prod.id} className="cart-product">
         <img className="cart-product-image" src={prod.image} alt={prod.title} />
         <div className="cart-product-title">{prod.title}</div>
         <div className="cart-product-price">

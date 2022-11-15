@@ -170,6 +170,7 @@ footer {
 }
 
 .card {
+  max-height: 350px;
   /* max-width: 250px; */
   padding: 1rem;
   display: inline-flex;

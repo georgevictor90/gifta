@@ -7,6 +7,7 @@ function App() {
   const [allCategories, setAllCategories] = React.useState([]);
   const [displayedProducts, setDisplayedProducts] = React.useState([]);
   const [cart, setCart] = React.useState([]);
+  const [cartCounter, setCartCounter] = React.useState(0);
 
   React.useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -32,6 +33,16 @@ function App() {
   React.useEffect(() => {
     setDisplayedProducts(allProducts);
   }, [allProducts]);
+
+  React.useEffect(() => {
+    let count = 0;
+    if (cart.length) {
+      cart.forEach((item) => {
+        count = count + item.quantity;
+      });
+    }
+    setCartCounter(count);
+  }, [cart]);
 
   function selectCategory(e) {
     setDisplayedProducts(
@@ -59,11 +70,26 @@ function App() {
 
   function addToCart(e) {
     const productId = e.target.parentNode.id;
-    const updatedCart = [...cart];
+    let updatedCart = [...cart];
+
     const selectedProduct = displayedProducts.find(
       (prod) => prod.id.toString() === productId
     );
-    updatedCart.push(selectedProduct);
+
+    const found = cart.find((item) => item.id.toString() === productId);
+
+    // console.log();
+
+    if (found) {
+      console.log("already in cart");
+      updatedCart = updatedCart.map((item) => {
+        return item.id === selectedProduct.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item;
+      });
+    } else {
+      updatedCart.push({ ...selectedProduct, quantity: 1 });
+    }
     setCart(updatedCart);
   }
 
@@ -72,6 +98,8 @@ function App() {
       <RouteSwitch
         addToCart={addToCart}
         cart={cart}
+        setCart={setCart}
+        cartCounter={cartCounter}
         displayedProducts={displayedProducts}
         allProducts={allProducts}
         allCategories={allCategories}
