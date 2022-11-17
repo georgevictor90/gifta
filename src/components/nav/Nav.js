@@ -1,15 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 function Nav({ cartCounter }) {
   return (
     <nav>
-      <h1 className="logo">.GIFTA</h1>
+      <h1 className="logo">. GIFTA</h1>
       <ul>
         <Link to="/home">Home</Link>
         <Link to="/shop">Shop</Link>
       </ul>
-      <Link to="/cart">Cart ({cartCounter})</Link>
+      <Link className="cart-icon" to="/cart">
+        <MdOutlineShoppingCart className="shopping-cart-icon" /> ({cartCounter})
+      </Link>
     </nav>
   );
 }

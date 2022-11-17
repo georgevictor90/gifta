@@ -16,7 +16,9 @@ a {
   text-decoration: none;
 }
 
-li {
+li,
+button,
+a {
   cursor: pointer;
 }
 
@@ -80,6 +82,16 @@ nav a::after {
 nav a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.cart-icon {
+  display: flex;
+  align-items: center;
+  color: firebrick;
+}
+.shopping-cart-icon {
+  font-size: 1.5rem;
+  color: firebrick;
 }
 
 .home {
@@ -297,6 +309,15 @@ footer {
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
 }
+.card-button:hover {
+  animation-name: shine;
+  animation-duration: 180ms;
+}
+
+.card-button:active {
+  transform: scale(0.95);
+  box-shadow: 3px 2px 25px 1px rgba(0, 0, 0, 0.25);
+}
 
 .cart-wrapper {
   padding: 2rem;
@@ -351,9 +372,6 @@ button {
 .final-cost-ammount > span:last-child {
   font-family: var(--montserrat);
   font-size: 1.2rem;
-}
-.promo {
-  /* background: red; */
 }
 
 .code-input {
@@ -476,4 +494,41 @@ button {
   justify-content: flex-start;
   gap: 1rem;
   /* background: red; */
+}
+
+@keyframes shine {
+  0% {
+    background: linear-gradient(30deg, hsl(260, 85%, 95%) 0%, firebrick 25%);
+  }
+
+  25% {
+    background: linear-gradient(
+      30deg,
+      firebrick 0%,
+      hsl(260, 85%, 95%) 25%,
+      firebrick 50%
+    );
+  }
+
+  50% {
+    background: linear-gradient(
+      30deg,
+      firebrick 0%,
+      hsl(260, 85%, 95%) 50%,
+      firebrick 75%
+    );
+  }
+
+  75% {
+    background: linear-gradient(
+      30deg,
+      firebrick 0%,
+      hsl(260, 85%, 95%) 75%,
+      firebrick 100%
+    );
+  }
+
+  100% {
+    background: linear-gradient(30deg, firebrick 0%, hsl(260, 85%, 95%) 100%);
+  }
 }
