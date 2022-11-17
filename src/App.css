@@ -13,7 +13,6 @@ body {
 }
 
 a {
-  color: white;
   text-decoration: none;
 }
 
@@ -43,6 +42,13 @@ nav {
   /* border: 1px solid black; */
 }
 
+.logo {
+  color: white;
+  background: black;
+  padding: 0.5rem 1rem;
+  font-size: 1.7rem;
+}
+
 nav > ul {
   display: flex;
   gap: 4rem;
@@ -50,6 +56,25 @@ nav > ul {
 
 nav a {
   color: black;
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: black;
+  transform-origin: bottom right;
+  transition: transform 0.15s ease-out;
+}
+
+nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
 
 .home {
@@ -78,12 +103,13 @@ nav a {
   flex-direction: column;
   gap: 1rem;
   /* border: 1px solid; */
-  /* width: 60ch; */
   left: 4rem;
   bottom: 4rem;
   padding: 4rem 6rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
+
+  border-radius: 5px;
 }
 
 .hero-text > p {
@@ -98,11 +124,13 @@ nav a {
   align-items: center;
   width: 8rem;
   height: 2rem;
-  background-color: lightgrey;
-  /* border: 1px solid white; */
-  color: #414a4c;
+  background-color: black;
+  border: 1px solid white;
+  color: white;
   border-radius: 3px;
   /* font-weight: bold; */
+  font-family: var(--montserrat);
+  font-size: 0.9rem;
 }
 
 .order-details {
