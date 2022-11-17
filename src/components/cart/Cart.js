@@ -1,5 +1,6 @@
 import React from "react";
 import { nanoid } from "nanoid";
+import OrderSummary from "../orderSummary/orderSummary";
 
 function Cart({ cart, setCart }) {
   function incrementQuantity(e) {
@@ -55,7 +56,7 @@ function Cart({ cart, setCart }) {
         </div>
         <div className="cart-product-total">
           <span>Total</span>
-          <span>{prod.price * prod.quantity} EUR</span>
+          <span>{(prod.price * prod.quantity).toFixed(2)} EUR</span>
         </div>
         <div className="button-container">
           <button data-id={prod.id} onClick={removeFromCart}>
@@ -67,13 +68,16 @@ function Cart({ cart, setCart }) {
   });
 
   return (
-    <section className="cart">
-      <h1>Your shopping cart</h1>
-      {cart.length ? (
-        <div className="items-container">{cartProducts}</div>
-      ) : (
-        <h4>You have no items added to your cart</h4>
-      )}
+    <section className="cart-wrapper">
+      {/* <h1>Your shopping cart</h1> */}
+      <div className="cart">
+        {cart.length ? (
+          <div className="items-container">{cartProducts}</div>
+        ) : (
+          <h4>You have no items added to your cart</h4>
+        )}
+      </div>
+      <OrderSummary cart={cart} />
     </section>
   );
 }
