@@ -16,9 +16,9 @@ a {
   text-decoration: none;
 }
 
-li,
 button,
-a {
+a,
+.sidebar li {
   cursor: pointer;
 }
 
@@ -29,7 +29,7 @@ a {
   /* text-align: center; */
   /* background-color: red; */
   /* border: 3px solid black; */
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   /* border: 1px solid red; */
 }
@@ -97,7 +97,6 @@ nav a:hover::after {
 .home {
   margin-top: 3rem;
   margin-inline: auto;
-  /* height: 93vh; */
   max-width: 90%;
 }
 
@@ -115,6 +114,7 @@ nav a:hover::after {
 }
 
 .hero-text {
+  max-width: 60%;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -131,7 +131,7 @@ nav a:hover::after {
 
 .hero-text > p {
   font-size: 1.2rem;
-  width: 50ch;
+  max-width: 50ch;
 }
 
 .hero-text > a {
