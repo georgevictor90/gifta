@@ -16,7 +16,7 @@ function Sidebar({
   });
 
   return (
-    <div className="sidebar">
+    <div data-testid="sidebar" className="sidebar">
       <h5>Categories</h5>
       <ul>
         <li onClick={showAllProducts}>All Products</li>
