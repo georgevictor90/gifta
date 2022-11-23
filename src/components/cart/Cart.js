@@ -1,5 +1,4 @@
 import React from "react";
-import { nanoid } from "nanoid";
 import OrderSummary from "../orderSummary/orderSummary";
 
 function Cart({ cart, setCart }) {
@@ -39,7 +38,7 @@ function Cart({ cart, setCart }) {
 
   const cartProducts = cart.map((prod) => {
     return (
-      <div key={nanoid()} id={prod.id} className="cart-product">
+      <div key={prod.id} id={prod.id} className="cart-product">
         <img className="cart-product-image" src={prod.image} alt={prod.title} />
         <div className="cart-product-title">{prod.title}</div>
         <div className="cart-product-price">
