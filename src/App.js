@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react";
 import RouteSwitch from "./components/RouteSwitch";
+import { getAllCategoriesFromApi, getAllProductsFromApi } from "./api";
 
 function App() {
   const [allProducts, setAllProducts] = React.useState([]);
@@ -10,24 +11,20 @@ function App() {
   const [cartCounter, setCartCounter] = React.useState(0);
 
   React.useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((data) => setAllProducts(data));
+    getAllProductsFromApi().then((data) => setAllProducts(data));
   }, []);
 
   React.useEffect(() => {
-    fetch("https://fakestoreapi.com/products/categories")
-      .then((res) => res.json())
-      .then((json) =>
-        setAllCategories(
-          json.map((categ) => {
-            return {
-              category: categ,
-              checked: true,
-            };
-          })
-        )
-      );
+    getAllCategoriesFromApi().then((json) =>
+      setAllCategories(
+        json.map((categ) => {
+          return {
+            category: categ,
+            checked: true,
+          };
+        })
+      )
+    );
   }, []);
 
   React.useEffect(() => {
@@ -101,7 +98,6 @@ function App() {
         setCart={setCart}
         cartCounter={cartCounter}
         displayedProducts={displayedProducts}
-        allProducts={allProducts}
         allCategories={allCategories}
         handleClick={selectCategory}
         showAllProducts={showAllProducts}
