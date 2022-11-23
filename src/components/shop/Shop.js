@@ -20,14 +20,15 @@ function Shop(props) {
   return (
     <section className="shop">
       <Sidebar
-        allProducts={props.allProducts}
         allCategories={props.allCategories}
         handleClick={props.handleClick}
         showAllProducts={props.showAllProducts}
         sortPriceAscending={props.sortPriceAscending}
         sortPriceDescending={props.sortPriceDescending}
       />
-      <div className="cards-container">{cardElements}</div>
+      <div data-testid="cards-container" className="cards-container">
+        {cardElements}
+      </div>
     </section>
   );
 }
