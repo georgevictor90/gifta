@@ -21,7 +21,6 @@ function RouteSwitch(props) {
             <Shop
               addToCart={props.addToCart}
               displayedProducts={props.displayedProducts}
-              allProducts={props.allProducts}
               allCategories={props.allCategories}
               handleClick={props.handleClick}
               showAllProducts={props.showAllProducts}
