@@ -35,8 +35,7 @@ function Home() {
           autem error incidunt fugit, animi officia assumenda eum consequuntur
           minus corrupti quod explicabo velit cupiditate ratione. Ratione ab
           dolores, quasi nam nihil ipsa repudiandae suscipit aspernatur autem
-          earum! Nemo enim ullam magni temporibus nesciunt esse quibusdam, at
-          pariatur. Voluptatem, minus! Placeat, ullam deserunt?
+          earum!
         </p>
       </div>
     </section>
