@@ -66,7 +66,8 @@ function App() {
   }
 
   function addToCart(e) {
-    const productId = e.target.parentNode.id;
+    const productId = e.target.parentNode.parentNode.id;
+
     let updatedCart = [...cart];
 
     const selectedProduct = displayedProducts.find(
