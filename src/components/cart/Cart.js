@@ -1,5 +1,6 @@
 import React from "react";
 import OrderSummary from "../orderSummary/orderSummary";
+import { MdRemoveCircle } from "react-icons/md";
 
 function Cart({ cart, setCart }) {
   function incrementQuantity(e) {
@@ -10,7 +11,6 @@ function Cart({ cart, setCart }) {
         ? { ...prod, quantity: prod.quantity + 1 }
         : prod;
     });
-    console.log(newCartItems);
     setCart(newCartItems);
   }
 
@@ -29,7 +29,7 @@ function Cart({ cart, setCart }) {
 
   function removeFromCart(e) {
     let newCartItems = [...cart];
-    const productId = e.target.dataset.id;
+    const productId = e.currentTarget.dataset.id;
     const itemToRemove = cart.find((prod) => prod.id.toString() === productId);
     const index = cart.indexOf(itemToRemove);
     newCartItems.splice(index, 1);
@@ -46,7 +46,6 @@ function Cart({ cart, setCart }) {
           <span>{prod.price} EUR</span>
         </div>
         <div className="quantity-container">
-          <span>Quantity</span>
           <div className="quantity-counter">
             <span onClick={decrementQuantity}>-</span>
             <span>{prod.quantity}</span>
@@ -57,11 +56,12 @@ function Cart({ cart, setCart }) {
           <span>Total</span>
           <span>{(prod.price * prod.quantity).toFixed(2)} EUR</span>
         </div>
-        <div className="button-container">
-          <button data-id={prod.id} onClick={removeFromCart}>
-            Remove item
-          </button>
-        </div>
+
+        <MdRemoveCircle
+          data-id={prod.id}
+          onClick={removeFromCart}
+          className="remove-icon"
+        />
       </div>
     );
   });
