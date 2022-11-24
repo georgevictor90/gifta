@@ -3,12 +3,18 @@ import React from "react";
 import RouteSwitch from "./components/RouteSwitch";
 import { getAllCategoriesFromApi, getAllProductsFromApi } from "./api";
 
+const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
+
 function App() {
   const [allProducts, setAllProducts] = React.useState([]);
   const [allCategories, setAllCategories] = React.useState([]);
   const [displayedProducts, setDisplayedProducts] = React.useState([]);
-  const [cart, setCart] = React.useState([]);
+  const [cart, setCart] = React.useState(cartFromLocalStorage);
   const [cartCounter, setCartCounter] = React.useState(0);
+
+  React.useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   React.useEffect(() => {
     getAllProductsFromApi().then((data) => setAllProducts(data));
