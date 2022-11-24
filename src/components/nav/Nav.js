@@ -5,7 +5,9 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 function Nav({ cartCounter }) {
   return (
     <nav>
-      <h1 className="logo">. GIFTA</h1>
+      <h1 className="logo">
+        <Link to="/home">. GIFTA</Link>
+      </h1>
       <ul>
         <Link to="/home">Home</Link>
         <Link to="/shop">Shop</Link>
