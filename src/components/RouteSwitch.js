@@ -9,7 +9,7 @@ import Footer from "./footer/Footer";
 
 function RouteSwitch(props) {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/odin-shopping-cart">
       <Nav cartCounter={props.cartCounter} />
       <Routes>
         <Route index element={<Home />} />
