@@ -19,7 +19,7 @@ function Shop(props) {
 
   return (
     <section className="shop">
-      {cardElements ? (
+      {cardElements.length ? (
         <>
           <Sidebar
             allCategories={props.allCategories}
@@ -35,7 +35,7 @@ function Shop(props) {
       ) : (
         <div className="no-products">
           <p>Getting products</p>
-          <div class="lds-circle">
+          <div className="lds-circle">
             <div></div>
           </div>
         </div>
