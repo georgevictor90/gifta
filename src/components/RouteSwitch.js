@@ -9,7 +9,7 @@ import Footer from "./footer/Footer";
 
 function RouteSwitch(props) {
   return (
-    <BrowserRouter basename="/odin-shopping-cart">
+    <BrowserRouter basename="/">
       <Nav cartCounter={props.cartCounter} />
       <Routes>
         <Route index element={<Home />} />
@@ -34,7 +34,7 @@ function RouteSwitch(props) {
           path="/cart"
           element={<Cart cart={props.cart} setCart={props.setCart} />}
         />
-        {/* <Route path="*" element={<NoMatch />} /> */}
+        <Route path="*" element={<Home />} />
       </Routes>
       <Footer />
     </BrowserRouter>
