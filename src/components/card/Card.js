@@ -1,5 +1,5 @@
 import React from "react";
-import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+import { MdOutlineFavoriteBorder } from "react-icons/md";
 
 function Card(props) {
   return (
