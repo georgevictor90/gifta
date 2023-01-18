@@ -219,11 +219,25 @@ footer {
 .cards-container {
   height: 90vh;
   padding: 2rem;
+  padding-bottom: 4rem;
   overflow-y: scroll;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
+
+  -webkit-mask-image: linear-gradient(
+    to top,
+    transparent 5%,
+    rgba(255, 255, 255, 0.5) 7%,
+    black 10%
+  );
+  mask-image: linear-gradient(
+    to top,
+    transparent 5%,
+    rgba(255, 255, 255, 0.5) 7%,
+    black 10%
+  );
 }
 
 .card {
