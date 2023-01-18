@@ -19,16 +19,27 @@ function Shop(props) {
 
   return (
     <section className="shop">
-      <Sidebar
-        allCategories={props.allCategories}
-        handleClick={props.handleClick}
-        showAllProducts={props.showAllProducts}
-        sortPriceAscending={props.sortPriceAscending}
-        sortPriceDescending={props.sortPriceDescending}
-      />
-      <div data-testid="cards-container" className="cards-container">
-        {cardElements}
-      </div>
+      {cardElements ? (
+        <>
+          <Sidebar
+            allCategories={props.allCategories}
+            handleClick={props.handleClick}
+            showAllProducts={props.showAllProducts}
+            sortPriceAscending={props.sortPriceAscending}
+            sortPriceDescending={props.sortPriceDescending}
+          />
+          <div data-testid="cards-container" className="cards-container">
+            {cardElements}
+          </div>
+        </>
+      ) : (
+        <div className="no-products">
+          <p>Getting products</p>
+          <div class="lds-circle">
+            <div></div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
