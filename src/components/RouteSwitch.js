@@ -12,8 +12,8 @@ function RouteSwitch(props) {
     <BrowserRouter basename="/odin-shopping-cart">
       <Nav cartCounter={props.cartCounter} />
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="/home" element={<Home />} />
+        <Route index path="/" element={<Home />} />
+        <Route exact path="/home" element={<Home />} />
         <Route
           exact
           path="/shop"
