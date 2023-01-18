@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./home/Home";
 import Shop from "./shop/Shop";
 import Product from "./product/Product";
@@ -9,7 +9,8 @@ import Footer from "./footer/Footer";
 
 function RouteSwitch(props) {
   return (
-    <BrowserRouter basename="/">
+    <HashRouter>
+      {/* basename="/odin-shopping-cart" */}
       <Nav cartCounter={props.cartCounter} />
       <Routes>
         <Route index element={<Home />} />
@@ -37,7 +38,7 @@ function RouteSwitch(props) {
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
