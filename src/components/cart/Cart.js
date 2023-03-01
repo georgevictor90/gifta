@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../RouteSwitch";
 import OrderSummary from "../orderSummary/orderSummary";
 import { MdRemoveCircle } from "react-icons/md";
 
-function Cart({ cart, setCart }) {
+function Cart() {
+  const { cart, setCart } = useContext(CartContext);
+
   function incrementQuantity(e) {
-    // console.log(e.target.parentNode.parentNode.parentNode.id);
     const productId = e.target.parentNode.parentNode.parentNode.id;
     const newCartItems = cart.map((prod) => {
       return prod.id.toString() === productId
@@ -24,7 +26,6 @@ function Cart({ cart, setCart }) {
         : prod;
     });
     setCart(newCartItems);
-    // console.log(productId);
   }
 
   function removeFromCart(e) {
@@ -47,9 +48,9 @@ function Cart({ cart, setCart }) {
         </div>
         <div className="quantity-container">
           <div className="quantity-counter">
-            <span onClick={decrementQuantity}>-</span>
+            <button onClick={decrementQuantity}>-</button>
             <span>{prod.quantity}</span>
-            <span onClick={incrementQuantity}>+</span>
+            <button onClick={incrementQuantity}>+</button>
           </div>
         </div>
         <div className="cart-product-total">
@@ -68,7 +69,6 @@ function Cart({ cart, setCart }) {
 
   return (
     <section className="cart-wrapper">
-      {/* <h1>Your shopping cart</h1> */}
       <div className="cart">
         {cart.length ? (
           <div className="items-container">{cartProducts}</div>

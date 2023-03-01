@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./home/Home";
 import Shop from "./shop/Shop";
@@ -7,34 +7,28 @@ import Cart from "./cart/Cart";
 import Nav from "./nav/Nav";
 import Footer from "./footer/Footer";
 
-function RouteSwitch(props) {
+const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
+export const CartContext = createContext(null);
+
+function RouteSwitch() {
+  const [cart, setCart] = useState(cartFromLocalStorage);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   return (
     <BrowserRouter basename="/odin-shopping-cart">
-      <Nav cartCounter={props.cartCounter} />
-      <Routes>
-        <Route index path="/" element={<Home />} />
-        <Route exact path="/home" element={<Home />} />
-        <Route
-          exact
-          path="/shop"
-          element={
-            <Shop
-              addToCart={props.addToCart}
-              displayedProducts={props.displayedProducts}
-              allCategories={props.allCategories}
-              handleClick={props.handleClick}
-              showAllProducts={props.showAllProducts}
-              sortPriceAscending={props.sortPriceAscending}
-              sortPriceDescending={props.sortPriceDescending}
-            />
-          }
-        />
-        <Route path="/shop/product" element={<Product />} />
-        <Route
-          path="/cart"
-          element={<Cart cart={props.cart} setCart={props.setCart} />}
-        />
-      </Routes>
+      <CartContext.Provider value={{ cart, setCart }}>
+        <Nav />
+        <Routes>
+          <Route index path="/" element={<Home />} />
+          <Route exact path="/home" element={<Home />} />
+          <Route exact path="/shop" element={<Shop />} />
+          <Route path="/shop/product" element={<Product />} />
+          <Route path="/cart" element={<Cart />} />
+        </Routes>
+      </CartContext.Provider>
       <Footer />
     </BrowserRouter>
   );

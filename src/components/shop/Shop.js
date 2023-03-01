@@ -1,18 +1,27 @@
-import React from "react";
+import React, { useState, useEffect, createContext } from "react";
+import { getAllProductsFromApi } from "../../api";
 import Card from "../card/Card";
 import Sidebar from "../sidebar/Sidebar";
+export const ProductsContext = createContext(null);
 
-function Shop(props) {
-  const cardElements = props.displayedProducts.map((product) => {
+function Shop() {
+  const [allProducts, setAllProducts] = useState([]);
+  const [displayedProducts, setDisplayedProducts] = useState([]);
+
+  useEffect(() => {
+    getAllProductsFromApi().then((data) => setAllProducts(data));
+  }, []);
+
+  useEffect(() => {
+    setDisplayedProducts(allProducts);
+  }, [allProducts]);
+
+  const cardElements = displayedProducts.map((product) => {
     return (
       <Card
-        addToCart={props.addToCart}
+        displayedProducts={displayedProducts}
         key={product.id}
-        id={product.id}
-        title={product.title}
-        description={product.description}
-        image={product.image}
-        price={product.price}
+        product={product}
       />
     );
   });
@@ -21,16 +30,14 @@ function Shop(props) {
     <section className="shop">
       {cardElements.length ? (
         <>
-          <Sidebar
-            allCategories={props.allCategories}
-            handleClick={props.handleClick}
-            showAllProducts={props.showAllProducts}
-            sortPriceAscending={props.sortPriceAscending}
-            sortPriceDescending={props.sortPriceDescending}
-          />
-          <div data-testid="cards-container" className="cards-container">
-            {cardElements}
-          </div>
+          <ProductsContext.Provider
+            value={{ allProducts, displayedProducts, setDisplayedProducts }}
+          >
+            <Sidebar />
+            <div data-testid="cards-container" className="cards-container">
+              {cardElements}
+            </div>
+          </ProductsContext.Provider>
         </>
       ) : (
         <div className="no-products">
