@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect } from "react";
 import RouteSwitch from "./components/RouteSwitch";
 import { getAllCategoriesFromApi, getAllProductsFromApi } from "./api";
 
@@ -12,15 +12,15 @@ function App() {
   const [cart, setCart] = React.useState(cartFromLocalStorage);
   const [cartCounter, setCartCounter] = React.useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     getAllProductsFromApi().then((data) => setAllProducts(data));
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     getAllCategoriesFromApi().then((json) =>
       setAllCategories(
         json.map((categ) => {
@@ -33,11 +33,11 @@ function App() {
     );
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setDisplayedProducts(allProducts);
   }, [allProducts]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let count = 0;
     if (cart.length) {
       cart.forEach((item) => {
@@ -73,19 +73,13 @@ function App() {
 
   function addToCart(e) {
     const productId = e.target.parentNode.parentNode.id;
-
     let updatedCart = [...cart];
-
     const selectedProduct = displayedProducts.find(
       (prod) => prod.id.toString() === productId
     );
-
     const found = cart.find((item) => item.id.toString() === productId);
 
-    // console.log();
-
     if (found) {
-      // console.log("already in cart");
       updatedCart = updatedCart.map((item) => {
         return item.id === selectedProduct.id
           ? { ...item, quantity: item.quantity + 1 }
