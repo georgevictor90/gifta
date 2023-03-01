@@ -566,15 +566,15 @@ button {
   gap: 5px;
 }
 
-.quantity-counter > span {
+.quantity-counter > * {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
 }
 
-.quantity-counter > span:first-child,
-.quantity-counter > span:last-child {
+.quantity-counter > button {
+  border: none;
   width: 25px;
   background: lightgray;
   padding: 0.1rem 0.5rem;
