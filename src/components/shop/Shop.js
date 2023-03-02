@@ -4,10 +4,17 @@ import Card from "../card/Card";
 import Sidebar from "../sidebar/Sidebar";
 export const ProductsContext = createContext(null);
 
+const favoritesFromLocalStorage =
+  JSON.parse(localStorage.getItem("favorites")) || [];
+
 function Shop() {
   const [allProducts, setAllProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(favoritesFromLocalStorage);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   useEffect(() => {
     getAllProductsFromApi().then((data) =>
