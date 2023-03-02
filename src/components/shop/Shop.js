@@ -9,7 +9,13 @@ function Shop() {
   const [displayedProducts, setDisplayedProducts] = useState([]);
 
   useEffect(() => {
-    getAllProductsFromApi().then((data) => setAllProducts(data));
+    getAllProductsFromApi().then((data) =>
+      setAllProducts(
+        data.map((product) => {
+          return { ...product, favorite: false };
+        })
+      )
+    );
   }, []);
 
   useEffect(() => {
@@ -19,7 +25,7 @@ function Shop() {
   const cardElements = displayedProducts.map((product) => {
     return (
       <Card
-        displayedProducts={displayedProducts}
+        // displayedProducts={displayedProducts}
         key={product.id}
         product={product}
       />
@@ -31,7 +37,12 @@ function Shop() {
       {cardElements.length ? (
         <>
           <ProductsContext.Provider
-            value={{ allProducts, displayedProducts, setDisplayedProducts }}
+            value={{
+              allProducts,
+              setAllProducts,
+              displayedProducts,
+              setDisplayedProducts,
+            }}
           >
             <Sidebar />
             <div data-testid="cards-container" className="cards-container">

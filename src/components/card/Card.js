@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
-import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { CartContext } from "../RouteSwitch";
+import { ProductsContext } from "../shop/Shop";
 
-function Card({ product, displayedProducts }) {
+function Card({ product }) {
   const { cart, setCart } = useContext(CartContext);
+  const { displayedProducts, allProducts, setAllProducts } =
+    useContext(ProductsContext);
 
   function addToCart(e) {
     const productId = e.target.parentNode.parentNode.id;
@@ -25,25 +28,35 @@ function Card({ product, displayedProducts }) {
     setCart(updatedCart);
   }
 
+  function toggleFavorite(productId) {
+    setAllProducts(
+      allProducts.map((item) => {
+        return item.id === productId
+          ? { ...item, favorite: !item.favorite }
+          : item;
+      })
+    );
+  }
+
   return (
     <div className="card" id={product.id}>
       <figure>
-        {/* get favoriteStatus from props and conditionally render heart icon */}
-        <MdOutlineFavoriteBorder className="card-favorite-icon" />
-
-        {/* get img src from props  */}
+        <button
+          className="card-favorite-button"
+          onClick={() => toggleFavorite(product.id)}
+        >
+          {product.favorite ? (
+            <MdOutlineFavorite className="card-favorite-icon" />
+          ) : (
+            <MdOutlineFavoriteBorder className="card-favorite-icon" />
+          )}
+        </button>
         <img src={product.image} alt={product.title} />
       </figure>
-
       <div className="card-text">
         <span className="card-title">{product.title}</span>
-
-        {/* get stockStatus from props */}
         <span className="card-stock">in stock</span>
-
-        {/* get price from props */}
         <span className="card-price">{product.price} EUR</span>
-
         <button className="card-button" onClick={addToCart}>
           Add to cart
         </button>
