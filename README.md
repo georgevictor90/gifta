@@ -34,27 +34,18 @@ This game was built using the following technologies and tools:
 - [React Hooks](https://reactjs.org/docs/hooks-intro.html) - A new feature in React 16.8 that lets you use state and other React features without writing a class
 - [Create React App](https://create-react-app.dev/) - A tool for creating React apps with no build configuration
 
-## Installation
-
-Install my-project with npm
-
-```bash
-  npm install my-project
-  cd my-project
-```
-
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/georgevictor90/odin-shopping-cart
+  git clone https://github.com/georgevictor90/gifta
 ```
 
 Go to the project directory
 
 ```bash
-  cd odin-shopping-cart
+  cd gifta
 ```
 
 Install dependencies
