@@ -7,6 +7,7 @@ export const ProductsContext = createContext(null);
 function Shop() {
   const [allProducts, setAllProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     getAllProductsFromApi().then((data) =>
@@ -23,41 +24,41 @@ function Shop() {
   }, [allProducts]);
 
   const cardElements = displayedProducts.map((product) => {
-    return (
-      <Card
-        // displayedProducts={displayedProducts}
-        key={product.id}
-        product={product}
-      />
-    );
+    return <Card key={product.id} product={product} />;
   });
 
   return (
     <section className="shop">
-      {cardElements.length ? (
-        <>
-          <ProductsContext.Provider
-            value={{
-              allProducts,
-              setAllProducts,
-              displayedProducts,
-              setDisplayedProducts,
-            }}
-          >
-            <Sidebar />
-            <div data-testid="cards-container" className="cards-container">
-              {cardElements}
-            </div>
-          </ProductsContext.Provider>
-        </>
-      ) : (
-        <div className="no-products">
-          <p>Getting products</p>
-          <div className="lds-circle">
-            <div></div>
+      <ProductsContext.Provider
+        value={{
+          favorites,
+          setFavorites,
+          allProducts,
+          setAllProducts,
+          displayedProducts,
+          setDisplayedProducts,
+        }}
+      >
+        <Sidebar />
+        {cardElements.length ? (
+          <div data-testid="cards-container" className="cards-container">
+            {cardElements}
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="no-products">
+            {favorites.length ? (
+              <>
+                <p>Getting products</p>
+                <div className="lds-circle">
+                  <div></div>
+                </div>
+              </>
+            ) : (
+              <p>You have no favorite items</p>
+            )}
+          </div>
+        )}
+      </ProductsContext.Provider>
     </section>
   );
 }

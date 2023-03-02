@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import { getAllCategoriesFromApi } from "../../api";
 import { ProductsContext } from "../shop/Shop";
+import { MdOutlineFavorite } from "react-icons/md";
 
 function Sidebar() {
-  const { allProducts, displayedProducts, setDisplayedProducts } =
+  const { favorites, allProducts, displayedProducts, setDisplayedProducts } =
     useContext(ProductsContext);
   const [allCategories, setAllCategories] = useState([]);
 
@@ -44,6 +45,10 @@ function Sidebar() {
     setDisplayedProducts(sorted);
   }
 
+  function showFavorites() {
+    setDisplayedProducts(favorites);
+  }
+
   const listItems = allCategories.map((categ) => {
     return (
       <li id={categ.category} key={categ.category} onClick={selectCategory}>
@@ -58,6 +63,10 @@ function Sidebar() {
       <ul>
         <li onClick={showAllProducts}>All Products</li>
         {listItems}
+        <li onClick={showFavorites} className="favorites-link">
+          <MdOutlineFavorite className="favorite-link--icon" />
+          Favorites
+        </li>
       </ul>
       <h5>Sort Price</h5>
       <ul>

@@ -5,7 +5,7 @@ import { ProductsContext } from "../shop/Shop";
 
 function Card({ product }) {
   const { cart, setCart } = useContext(CartContext);
-  const { displayedProducts, allProducts, setAllProducts } =
+  const { favorites, setFavorites, displayedProducts, allProducts } =
     useContext(ProductsContext);
 
   function addToCart(e) {
@@ -29,13 +29,12 @@ function Card({ product }) {
   }
 
   function toggleFavorite(productId) {
-    setAllProducts(
-      allProducts.map((item) => {
-        return item.id === productId
-          ? { ...item, favorite: !item.favorite }
-          : item;
-      })
-    );
+    const found = allProducts.find((item) => item.id === productId);
+    if (favorites.includes(found)) {
+      setFavorites(favorites.filter((item) => item.id !== found.id));
+    } else {
+      setFavorites([...favorites, found]);
+    }
   }
 
   return (
@@ -45,7 +44,7 @@ function Card({ product }) {
           className="card-favorite-button"
           onClick={() => toggleFavorite(product.id)}
         >
-          {product.favorite ? (
+          {favorites.find((item) => item.id === product.id) ? (
             <MdOutlineFavorite className="card-favorite-icon" />
           ) : (
             <MdOutlineFavoriteBorder className="card-favorite-icon" />

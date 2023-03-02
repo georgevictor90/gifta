@@ -197,6 +197,11 @@ footer {
   font-weight: 500;
 }
 
+.no-products {
+  width: 100%;
+  text-align: center;
+}
+
 /* Loading spinner */
 .lds-circle {
   display: inline-block;
@@ -705,6 +710,20 @@ button {
     background-color: transparent;
   }
 
+  .sidebar .favorites-link {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: red;
+  }
+
+  .sidebar .favorites-link:hover {
+    background: red;
+  }
+
+  .favorite-link--icon {
+    font-size: 1.1rem;
+  }
   .cards-container {
     height: 90vh;
   }
