@@ -324,9 +324,15 @@ footer {
   text-align: start;
 }
 
+.card-favorite-button {
+  border: none;
+  background: none;
+  align-self: flex-start;
+}
+
 .card-favorite-icon {
   font-size: 1.5rem;
-  color: #b7c0c1;
+  color: red;
 }
 
 .card-title {
