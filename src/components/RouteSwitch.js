@@ -18,7 +18,7 @@ function RouteSwitch() {
   }, [cart]);
 
   return (
-    <BrowserRouter basename="/odin-shopping-cart">
+    <BrowserRouter basename="/gifta">
       <CartContext.Provider value={{ cart, setCart }}>
         <Nav />
         <Routes>
