@@ -51,8 +51,10 @@ function Sidebar() {
 
   const listItems = allCategories.map((categ) => {
     return (
-      <li id={categ.category} key={categ.category} onClick={selectCategory}>
-        {categ.category}
+      <li key={categ.category}>
+        <button id={categ.category} onClick={selectCategory}>
+          {categ.category}
+        </button>
       </li>
     );
   });
