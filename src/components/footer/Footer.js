@@ -1,7 +1,11 @@
 import React from "react";
 
 function Footer() {
-  return <footer>crafted by Victor Lacatus 2022</footer>;
+  return (
+    <footer>
+      <p>crafted by Victor Lacatus 2023</p>
+    </footer>
+  );
 }
 
 export default Footer;
