@@ -84,7 +84,8 @@ nav a::after {
   transition: transform 0.15s ease-out;
 }
 
-nav a:hover::after {
+nav a:hover::after,
+.active::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
@@ -129,7 +130,6 @@ nav a:hover::after {
   gap: 1rem;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
-  border-radius: 5px;
 }
 
 .hero-text > p {
@@ -696,10 +696,16 @@ button {
 /* Styles for desktop devices (1024px and up) */
 
 @media (min-width: 1024px) {
+  .App {
+    height: 100vh;
+    justify-content: space-between;
+  }
+
   .shop {
     flex-direction: row;
     width: 90%;
     margin: 0 auto;
+    height: 85vh;
   }
 
   .sidebar,
@@ -725,7 +731,7 @@ button {
     font-size: 1.1rem;
   }
   .cards-container {
-    height: 90vh;
+    height: 100%;
   }
 
   .card {
@@ -751,5 +757,9 @@ button {
     width: 350px;
     border-radius: 20px;
     align-self: flex-start;
+  }
+
+  .footer {
+    margin-top: 0;
   }
 }
