@@ -1,11 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CartContext } from "../RouteSwitch";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MdOutlineShoppingCart } from "react-icons/md";
 
 function Nav() {
   const { cart } = useContext(CartContext);
   const [cartCounter, setCartCounter] = useState(0);
+  const [currentSection, setCurrentSection] = useState("");
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setCurrentSection("home");
+    } else {
+      setCurrentSection(location.pathname.substring(1));
+    }
+  }, [location]);
 
   useEffect(() => {
     let count = 0;
@@ -23,10 +34,17 @@ function Nav() {
         <Link to="/home">. GIFTA</Link>
       </h1>
       <ul>
-        <Link to="/home">Home</Link>
-        <Link to="/shop">Shop</Link>
+        <Link className={currentSection === "home" ? "active" : ""} to="/home">
+          Home
+        </Link>
+        <Link className={currentSection === "shop" ? "active" : ""} to="/shop">
+          Shop
+        </Link>
       </ul>
-      <Link className="cart-icon" to="/cart">
+      <Link
+        className={currentSection === "cart" ? "cart-icon active" : "cart-icon"}
+        to="/cart"
+      >
         <MdOutlineShoppingCart className="shopping-cart-icon" /> ({cartCounter})
       </Link>
     </nav>
