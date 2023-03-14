@@ -22,20 +22,30 @@ function Home() {
         </div>
       </div>
       <div className="about-us">
+        <p>
+          Welcome to Gifta, the online shop for premium gifts that are sure to
+          impress. Our carefully curated selection includes everything from
+          high-quality clothing and exquisite jewelry to cutting-edge
+          electronics and more. Whether you're shopping for a special occasion
+          or just looking to treat yourself, we have the perfect gift for you.
+        </p>
+        <p>
+          At Gifta, we are committed to offering our customers the best possible
+          shopping experience.
+        </p>
+        <p>
+          We pride ourselves on our exceptional customer service, fast and
+          reliable shipping, and our unwavering dedication to quality. All of
+          our products are sourced from top brands and manufacturers, ensuring
+          that you receive only the best. From classic pieces to the latest
+          trends, we have something for everyone. Thank you for choosing Gifta
+          for all of your gifting needs. Shop with us today and discover the
+          perfect gift that will make a lasting impression.
+        </p>
         <p>When you're part of it, you put your heart into it.</p>
         <p>
           We go above and beyond to offer quality products and outstanding
           service to the people who matter most - you, our customers.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-          recusandae quis repellat maiores, quos dolor sit nam nemo enim
-          asperiores. Blanditiis voluptates laborum ex iure. Impedit nesciunt
-          deserunt ipsum culpa quidem quibusdam hic dolorem obcaecati rerum iste
-          autem error incidunt fugit, animi officia assumenda eum consequuntur
-          minus corrupti quod explicabo velit cupiditate ratione. Ratione ab
-          dolores, quasi nam nihil ipsa repudiandae suscipit aspernatur autem
-          earum!
         </p>
       </div>
     </section>
