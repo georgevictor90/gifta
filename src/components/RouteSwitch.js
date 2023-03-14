@@ -17,15 +17,28 @@ function RouteSwitch() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  function addProductToCart(product) {
+    const productAlreadyInCart = cart.find((item) => item.id === product.id);
+    if (productAlreadyInCart) {
+      const updatedCart = cart.map((item) =>
+        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+      );
+      setCart(updatedCart);
+    } else {
+      const updatedCart = [...cart, { ...product, quantity: 1 }];
+      setCart(updatedCart);
+    }
+  }
+
   return (
     <BrowserRouter basename="/gifta">
-      <CartContext.Provider value={{ cart, setCart }}>
+      <CartContext.Provider value={{ cart, setCart, addProductToCart }}>
         <Nav />
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route exact path="/home" element={<Home />} />
           <Route exact path="/shop" element={<Shop />} />
-          <Route path="/shop/product" element={<Product />} />
+          <Route path="/shop/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </CartContext.Provider>
