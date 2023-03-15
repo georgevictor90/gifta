@@ -4,31 +4,22 @@ import { ProductsContext } from "../shop/Shop";
 import { MdOutlineFavorite } from "react-icons/md";
 
 function Sidebar() {
-  const { favorites, allProducts, displayedProducts, setDisplayedProducts } =
-    useContext(ProductsContext);
+  const {
+    favorites,
+    setSelectedCategory,
+    displayedProducts,
+    setDisplayedProducts,
+    selectedCategory,
+  } = useContext(ProductsContext);
   const [allCategories, setAllCategories] = useState([]);
 
   useEffect(() => {
-    getAllCategoriesFromApi().then((json) =>
-      setAllCategories(
-        json.map((categ) => {
-          return {
-            category: categ,
-            checked: true,
-          };
-        })
-      )
-    );
+    getAllCategoriesFromApi().then((data) => setAllCategories(data));
   }, []);
 
   function selectCategory(e) {
-    setDisplayedProducts(
-      allProducts.filter((prod) => prod.category === e.target.id)
-    );
-  }
-
-  function showAllProducts() {
-    setDisplayedProducts(allProducts);
+    const id = e.target.id;
+    setSelectedCategory(id);
   }
 
   function sortPriceAscending() {
@@ -46,35 +37,63 @@ function Sidebar() {
   }
 
   function showFavorites() {
+    setSelectedCategory("favorites");
     setDisplayedProducts(favorites);
   }
 
-  const listItems = allCategories.map((categ) => {
+  const listItems = allCategories.map((category) => {
     return (
-      <li id={categ.category} onClick={selectCategory} key={categ.category}>
-        {categ.category}
+      <li key={category}>
+        <button
+          id={category}
+          className={selectedCategory === category ? "selected" : ""}
+          onClick={selectCategory}
+        >
+          {category}
+        </button>
       </li>
     );
   });
 
-  return (
+  return listItems.length ? (
     <div data-testid="sidebar" className="sidebar">
       <h5>Categories</h5>
       <ul>
-        <li onClick={showAllProducts}>All Products</li>
+        <li>
+          <button
+            id="all products"
+            className={selectedCategory === "all products" ? "selected" : ""}
+            onClick={selectCategory}
+          >
+            All Products
+          </button>
+        </li>
         {listItems}
-        <li onClick={showFavorites} className="favorites-link">
-          <MdOutlineFavorite className="favorite-link--icon" />
-          Favorites
+        <li>
+          <button
+            onClick={showFavorites}
+            className={
+              selectedCategory === "favorites"
+                ? "selected favorites-link"
+                : "favorites-link"
+            }
+          >
+            <MdOutlineFavorite className="favorite-link--icon" />
+            Favorites
+          </button>
         </li>
       </ul>
       <h5>Sort Price</h5>
       <ul>
-        <li onClick={sortPriceDescending}>High to low</li>
-        <li onClick={sortPriceAscending}>Low to high</li>
+        <li>
+          <button onClick={sortPriceDescending}>High to low</button>
+        </li>
+        <li>
+          <button onClick={sortPriceAscending}>Low to high</button>
+        </li>
       </ul>
     </div>
-  );
+  ) : null;
 }
 
 export default Sidebar;
