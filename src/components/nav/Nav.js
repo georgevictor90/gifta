@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CartContext } from "../RouteSwitch";
 import { Link, useLocation } from "react-router-dom";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Badge } from "@mui/material";
 
 function Nav() {
   const { cart } = useContext(CartContext);
@@ -45,7 +46,9 @@ function Nav() {
         className={currentSection === "cart" ? "cart-icon active" : "cart-icon"}
         to="/cart"
       >
-        <MdOutlineShoppingCart className="shopping-cart-icon" /> ({cartCounter})
+        <Badge badgeContent={cartCounter} color="warning">
+          <ShoppingCartIcon fontSize="medium" />
+        </Badge>
       </Link>
     </nav>
   );
