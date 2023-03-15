@@ -14,7 +14,9 @@ function Card({ product }) {
     addProductToCart(product);
   }
 
-  function toggleFavorite(productId) {
+  function toggleFavorite(e, productId) {
+    e.preventDefault();
+    e.stopPropagation();
     const found = allProducts.find((item) => item.id === productId);
     if (favorites.includes(found)) {
       setFavorites(favorites.filter((item) => item.id !== found.id));
@@ -29,7 +31,7 @@ function Card({ product }) {
         <figure>
           <button
             className="card-favorite-button"
-            onClick={() => toggleFavorite(product.id)}
+            onClick={(e) => toggleFavorite(e, product.id)}
           >
             {favorites.find((item) => item.id === product.id) ? (
               <MdOutlineFavorite className="card-favorite-icon" />
