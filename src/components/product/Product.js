@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { CartContext } from "../RouteSwitch";
 
@@ -6,6 +6,10 @@ function Product() {
   const product = useLocation().state;
 
   const { addProductToCart } = useContext(CartContext);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="product-page">
