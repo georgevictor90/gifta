@@ -41,7 +41,9 @@ function Cart() {
     return (
       <div key={prod.id} id={prod.id} className="cart-product">
         <img className="cart-product-image" src={prod.image} alt={prod.title} />
-        <div className="cart-product-title">{prod.title}</div>
+        <div tabIndex="0" className="cart-product-title">
+          {prod.title}
+        </div>
         <div className="cart-product-price">
           <span>Each</span>
           <span>{prod.price} EUR</span>
@@ -58,11 +60,13 @@ function Cart() {
           <span>{(prod.price * prod.quantity).toFixed(2)} EUR</span>
         </div>
 
-        <MdRemoveCircle
+        <button
           data-id={prod.id}
           onClick={removeFromCart}
           className="remove-icon"
-        />
+        >
+          <MdRemoveCircle />
+        </button>
       </div>
     );
   });
