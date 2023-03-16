@@ -11,20 +11,20 @@ https://georgevictor90.github.io/gifta/
 
 - Responsive and easy-to-use interface
 - Browse and search products from an API
+- Search bar (Material UI component)
 - Sort products by category and price
 - Add products to a list of favorites
 - Add items to the cart
 - Adjust the quantity of each item in the cart
 - See the total amount to pay, including shipping tax
-- Calculate shipping tax with two shipping options (standard and express delivery)
 - Built with ReactJS and React Router
 - Uses React Hooks such as useState, useEffect, and useContext for state management
 
 ## Screenshots
 
-![Homepage](src/images/screenshots/home.png)
-![Shop](src/images/screenshots/shop.png)
-![Cart](src/images/screenshots/cart.png)
+![Desktop](src/images/screenshots/gifta.gif)
+
+![Mobile](src/images/screenshots/gifta-mobile.gif)
 
 ## Tech Stack
 
@@ -33,6 +33,7 @@ This game was built using the following technologies and tools:
 - [React](https://reactjs.org/) - A JavaScript library for building user interfaces
 - [React Hooks](https://reactjs.org/docs/hooks-intro.html) - A new feature in React 16.8 that lets you use state and other React features without writing a class
 - [Create React App](https://create-react-app.dev/) - A tool for creating React apps with no build configuration
+- [React Router](https://reactrouter.com/) - A popular package for handling routing in React applications
 
 ## Run Locally
 
