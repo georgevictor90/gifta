@@ -497,8 +497,9 @@ footer {
 }
 
 .card img {
-  max-height: 200px;
-  max-width: 150px;
+  height: 160px;
+  width: 160px;
+  object-fit: contain;
   margin: auto;
 }
 
@@ -904,8 +905,8 @@ button {
   }
 
   .card img {
-    max-width: 150px;
-    max-height: 100px;
+    width: 120px;
+    height: 120px;
   }
 
   .product-page {
@@ -1003,10 +1004,6 @@ button {
   .cards-container {
     height: auto;
     max-height: 100%;
-  }
-
-  .card {
-    height: 300px;
   }
 
   .no-products {
