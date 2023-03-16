@@ -26,7 +26,7 @@ function Card({ product }) {
   }
 
   return (
-    <Link to={`/shop/product/${product.id}`} state={product}>
+    <Link to={`/shop/product${product.id}`} state={product}>
       <div className="card" id={product.id}>
         <figure>
           <button

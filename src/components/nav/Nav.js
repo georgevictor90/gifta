@@ -32,10 +32,10 @@ function Nav() {
   return (
     <nav>
       <h1 className="logo">
-        <Link to="/home">. GIFTA</Link>
+        <Link to="/">. GIFTA</Link>
       </h1>
       <ul>
-        <Link className={currentSection === "home" ? "active" : ""} to="/home">
+        <Link className={currentSection === "home" ? "active" : ""} to="/">
           Home
         </Link>
         <Link className={currentSection === "shop" ? "active" : ""} to="/shop">
