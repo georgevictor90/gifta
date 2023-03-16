@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/gifta/static/css/main.6d1a483b.css",
-    "main.js": "/gifta/static/js/main.f5aa048b.js",
+    "main.js": "/gifta/static/js/main.e075b115.js",
     "static/media/hero.jpg": "/gifta/static/media/hero.d13fa9b883d79e1a703b.jpg",
     "index.html": "/gifta/index.html",
     "main.6d1a483b.css.map": "/gifta/static/css/main.6d1a483b.css.map",
-    "main.f5aa048b.js.map": "/gifta/static/js/main.f5aa048b.js.map"
+    "main.e075b115.js.map": "/gifta/static/js/main.e075b115.js.map"
   },
   "entrypoints": [
     "static/css/main.6d1a483b.css",
-    "static/js/main.f5aa048b.js"
+    "static/js/main.e075b115.js"
   ]
 }
