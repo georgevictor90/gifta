@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import { Routes, Route, HashRouter } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from "./home/Home";
 import Shop from "./shop/Shop";
 import Product from "./product/Product";
@@ -31,19 +31,18 @@ function RouteSwitch() {
   }
 
   return (
-    <HashRouter basename="/gifta">
+    <BrowserRouter basename="/gifta">
       <CartContext.Provider value={{ cart, setCart, addProductToCart }}>
         <Nav />
         <Routes>
-          <Route index path="/" element={<Home />} />
-          <Route exact path="/home" element={<Home />} />
-          <Route exact path="/shop" element={<Shop />} />
+          <Route exact path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/shop/product/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
       </CartContext.Provider>
       <Footer />
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
