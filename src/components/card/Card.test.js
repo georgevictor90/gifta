@@ -3,30 +3,59 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Card from "./Card";
 import userEvent from "@testing-library/user-event";
+import { CartContext } from "../RouteSwitch";
+import { ProductsContext } from "../shop/Shop";
+import { HashRouter } from "react-router-dom";
 
 describe("Card component", () => {
-  it("renders correctly with props", () => {
-    render(<Card price="325" title="Mens Casual T-shirt" />);
+  const mockCartContext = {
+    addProductToCart: jest.fn(),
+  };
 
-    expect(screen.getByAltText("Mens Casual T-shirt")).toBeInTheDocument();
+  const mockProductsContext = {
+    favorites: [{ id: 1, favorite: true }],
+    setFavorites: jest.fn(),
+    allProducts: [],
+  };
 
-    expect(screen.getByText("325 EUR")).toBeInTheDocument();
+  const mockProduct = { id: 1, image: "", title: "My Product", price: 10 };
 
-    expect(screen.getByText("Mens Casual T-shirt")).toBeInTheDocument();
+  test("renders correctly with props", () => {
+    render(
+      <HashRouter>
+        <ProductsContext.Provider value={mockProductsContext}>
+          <CartContext.Provider value={mockCartContext}>
+            <Card product={mockProduct} />
+          </CartContext.Provider>
+        </ProductsContext.Provider>
+      </HashRouter>
+    );
 
-    expect(screen.queryByText("Womens Casual T-shirt")).toBeNull();
+    expect(screen.getByAltText(mockProduct.title)).toBeInTheDocument();
+
+    expect(screen.getByText(`${mockProduct.price} EUR`)).toBeInTheDocument();
+
+    expect(screen.getByText(mockProduct.title)).toBeInTheDocument();
 
     expect(
       screen.getByRole("button", { name: "Add to cart" })
     ).toBeInTheDocument();
   });
-  it("calls onClick correct number of times", () => {
-    const onClickMock = jest.fn();
-    render(<Card addToCart={onClickMock} />);
-    const addToCartBtn = screen.getByRole("button", { name: "Add to cart" });
 
+  test("calls addProductToCart correct number of times", () => {
+    render(
+      <HashRouter>
+        <ProductsContext.Provider value={mockProductsContext}>
+          <CartContext.Provider value={mockCartContext}>
+            <Card product={mockProduct} />
+          </CartContext.Provider>
+        </ProductsContext.Provider>
+      </HashRouter>
+    );
+
+    const addToCartBtn = screen.getByRole("button", { name: "Add to cart" });
     userEvent.click(addToCartBtn);
     userEvent.click(addToCartBtn);
-    expect(onClickMock).toHaveBeenCalledTimes(2);
+    expect(mockCartContext.addProductToCart).toHaveBeenCalledTimes(2);
   });
 });

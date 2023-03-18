@@ -46,7 +46,11 @@ function Nav() {
         className={currentSection === "cart" ? "cart-icon active" : "cart-icon"}
         to="/cart"
       >
-        <Badge badgeContent={cartCounter} color="warning">
+        <Badge
+          data-testid="cart-badge"
+          badgeContent={cartCounter}
+          color="warning"
+        >
           <ShoppingCartIcon fontSize="medium" />
         </Badge>
       </Link>
